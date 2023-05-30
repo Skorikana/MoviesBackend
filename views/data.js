@@ -12,3 +12,4 @@ const moviesData = [
 ]
 
 module.exports = moviesData;
+// "mongodb": "^5.5.0",
