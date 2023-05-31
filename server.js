@@ -2,6 +2,7 @@ const express = require("express")                    //Load Express
 require('dotenv').config();
 const mongoose = require('mongoose');
 const cors = require('cors')   
+const db =mongoose.connection
 const Movie = require("./models/movies")
 const moviesData = require("./views/data")
 const moviesController = require("./controllers/movies")
@@ -18,6 +19,10 @@ mongoose.connection.once('open', ()=> {
     console.log('connected to mongo');
 });
 
+//Error
+db.on('error', err => console.log(err.message + ' is Mongod not running?'))
+db.on('disconnected', () => console.log('mongo disconnected'))
+
 //Middleware
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());             //use .json(), not .urlencoded()
@@ -25,7 +30,12 @@ app.use(express.static("public"))    // we need to tell express to use the publi
 app.use(cors({origin:"*"}))          // used to whitelist requests
 
 //Routes
-app.use("/movies", moviesController)  // telling server.js to get the routes from controllers/movies.js
+app.use("/", moviesController)  // telling server.js to get the routes from controllers/movies.js
+
+
+app.get("/", (req,res) =>{
+  res.send("<h1>Welcome to movie database</h1>");
+  })
 
 //Seeding the DB
 app.get('/seed', async (req, res) => {

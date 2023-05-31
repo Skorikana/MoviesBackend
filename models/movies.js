@@ -6,7 +6,7 @@ const moviesSchema = new mongoose.Schema({
     director:{type:String, required:true},
     language:{type:String, required:true},
     release:{type:String, required:true},
-   image:{type:String}
+    image:{type:String}
    
 },{timestamps:true});
 

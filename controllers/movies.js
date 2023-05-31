@@ -4,7 +4,6 @@ const Movie = require("../models/movies")
 
 //Index: show all the things
 router.get("/", (req,res) =>{
-    //res.send("Welcome to Movies page")
     Movie.find({}, (error, foundMovie)=>{
         res.json(foundMovie)
         });
