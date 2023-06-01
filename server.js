@@ -30,7 +30,7 @@ app.use(express.static("public"))    // we need to tell express to use the publi
 app.use(cors({origin:"*"}))          // used to whitelist requests
 
 //Routes
-app.use("/", moviesController)  // telling server.js to get the routes from controllers/movies.js
+app.use("/movies", moviesController)  // telling server.js to get the routes from controllers/movies.js
 
 
 app.get("/", (req,res) =>{
